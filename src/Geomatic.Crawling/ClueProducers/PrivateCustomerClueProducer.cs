@@ -33,7 +33,7 @@ namespace CluedIn.Crawling.Geometic.ClueProducers
             if (!data.OutgoingEdges.Any())
                 _factory.CreateEntityRootReference(clue, EntityEdgeType.PartOf);
 
-            var vocab = new PrivateCustomerVocabulary();
+            var vocab = Geomatic.Vocabularies.GeomaticVocabularies.PrivateCustomer;
             if (input.FHANUM != null)
                 data.Properties[vocab.FHANUM] = input.FHANUM.PrintIfAvailable();
             if (input.KUNLOEB != null)
