@@ -29,9 +29,6 @@ namespace CluedIn.Crawling.Geometic.ClueProducers
         {
             bool isPerson = string.IsNullOrEmpty(input.CVRNUM);
 
-            // Creates a TextInfo based on the "da-DK" culture.
-            TextInfo myTI = new CultureInfo("da-DK", false).TextInfo;
-
             Clue clue = null;
 
             if (isPerson)
@@ -49,25 +46,24 @@ namespace CluedIn.Crawling.Geometic.ClueProducers
             var data = clue.Data.EntityData;
 
             //Create identifiers
-            if (!string.IsNullOrWhiteSpace(input.CVRNUM) && !isPerson)
-            {
-                data.Codes.Add(new EntityCode(EntityType.Organization, Semler.Common.Origins.Cvr, input.CVRNUM));
-            }
+            //if (!string.IsNullOrWhiteSpace(input.CVRNUM) && !isPerson)
+            //{
+            //    data.Codes.Add(new EntityCode(EntityType.Organization, Semler.Common.Origins.Cvr, input.CVRNUM));
+            //}
 
             if (!string.IsNullOrWhiteSpace(input.KUNLOEB))
             {
                 if (!isPerson)
-                    data.Codes.Add(new EntityCode(EntityType.Organization, Semler.Common.Origins.KUK, input.KUNLOEB));
+                    data.Codes.Add(new EntityCode(EntityType.Organization, Semler.Common.Origins.CustId, input.KUNLOEB));
                 else
-                    data.Codes.Add(new EntityCode(EntityType.Infrastructure.User, Semler.Common.Origins.KUK, input.KUNLOEB));
+                    data.Codes.Add(new EntityCode(EntityType.Infrastructure.User, Semler.Common.Origins.CustId, input.KUNLOEB));
             }
 
             if (!string.IsNullOrWhiteSpace(input.NAVN))
             {
                 data.Name = input.NAVN;
-                //This works fine except for words that are entirely in uppercase, which are considered to be acronyms. That's why we need to convert to lowerCase first.
-                data.DisplayName = myTI.ToTitleCase(myTI.ToLower(input.NAVN));
-                data.Aliases.Add(input.NAVN);
+                data.DisplayName = input.NAVN.ToLower().ToTitleCase();
+                //data.Aliases.Add(input.NAVN);
             }
 
             if (!data.OutgoingEdges.Any())
