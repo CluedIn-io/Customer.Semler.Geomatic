@@ -192,12 +192,43 @@ namespace CluedIn.Crawling.Geomatic.Infrastructure
                     catch (Exception e)
                     {
                         ErrorString = e.Message;
-                        //throw;
-                        break;
+                        continue;
                     }
                     yield return returnValue;
                 }
             }
+        }
+
+        public List<string> GetKunloebIDList(string filepath)
+        {
+            List<string> KunloebIDList = new List<string>();
+            try
+            {
+                using (var parser = new TextFieldParser(filepath))
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.HasFieldsEnclosedInQuotes = true;
+                    parser.SetDelimiters(new string[] { ";" });
+                    parser.ReadFields();
+                    while (!parser.EndOfData)
+                    {
+                        try
+                        {
+                            var filterByKunloebIds = parser.ReadFields();
+                            KunloebIDList.Add(filterByKunloebIds[1]);
+                        }
+                        catch (Exception)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return KunloebIDList;
         }
     }
 }
