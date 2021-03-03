@@ -77,7 +77,15 @@ namespace CluedIn.Crawling.Geometic.ClueProducers
             if (!data.OutgoingEdges.Any())
                 _factory.CreateEntityRootReference(clue, EntityEdgeType.PartOf);
 
-            var vocab = new GeomaticAccountVocabulary(isPerson);
+            dynamic vocab;
+            if (isPerson)
+            {
+                vocab = new GeomaticPrivateAccountVocabulary();
+            }
+            else
+            {
+                vocab = new GeomaticBusinessAccountVocabulary();
+            }
 
             data.Properties[vocab.FHANUM] = input.FHANUM.PrintIfAvailable();
             data.Properties[vocab.KUNLOEB] = input.KUNLOEB.PrintIfAvailable();
