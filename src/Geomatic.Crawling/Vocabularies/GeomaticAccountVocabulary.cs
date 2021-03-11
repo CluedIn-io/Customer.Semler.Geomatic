@@ -8,7 +8,7 @@ namespace CluedIn.Crawling.Geometic.Vocabularies
         public GeomaticPrivateAccountVocabulary()
         {
             VocabularyName = "Geometic Account";
-            KeyPrefix = "geomatic.privateaccount";
+            KeyPrefix = "geomatic.User.Account";
             KeySeparator = ".";
             //Grouping = EntityType.Organization;
             Grouping = EntityType.Infrastructure.User;

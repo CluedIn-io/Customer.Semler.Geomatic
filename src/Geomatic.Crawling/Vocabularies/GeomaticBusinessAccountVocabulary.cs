@@ -8,7 +8,7 @@ namespace CluedIn.Crawling.Geometic.Vocabularies
         public GeomaticBusinessAccountVocabulary()
         {
             VocabularyName = "Geometic Account";
-            KeyPrefix = "geomatic.businessaccount";
+            KeyPrefix = "geomatic.Organization.Account";
             KeySeparator = ".";
             //Grouping = EntityType.Organization;
             Grouping = EntityType.Organization;
