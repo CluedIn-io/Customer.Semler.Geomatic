@@ -7,13 +7,13 @@ namespace CluedIn.Crawling.Geometic.Vocabularies
     {
         public GeomaticPrivateAccountVocabulary()
         {
-            VocabularyName = "Geometic Account";
+            VocabularyName = "Geometic User Account";
             KeyPrefix = "geomatic.User.Account";
             KeySeparator = ".";
             //Grouping = EntityType.Organization;
             Grouping = EntityType.Infrastructure.User;
 
-            AddGroup("Geometic Account Details", group =>
+            AddGroup("Geometic User Account Details", group =>
             {
                 FHANUM = group.Add(new VocabularyKey("FHANUM", VocabularyKeyDataType.Text, VocabularyKeyVisibility.Visible).WithDisplayName("FHANUM"));
                 KUNLOEB = group.Add(new VocabularyKey("KUNLOEB", VocabularyKeyDataType.Text, VocabularyKeyVisibility.Visible).WithDisplayName("KUNLOEB"));
